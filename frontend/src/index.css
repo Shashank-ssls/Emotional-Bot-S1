@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@1,400&family=Inter:wght@400;500&display=swap');
+
+@theme {
+  --color-bg: #FBF6EF;
+  --color-surface: #FFFFFF;
+  --color-border: #EFE7DC;
+  --color-primary: #C98B7A;
+  --color-secondary: #8AA88A;
+  --color-gold: #D4A85A;
+  --color-text: #3A332D;
+  --color-muted: #8A7F73;
+  --color-bot-bubble: #F4EBDF;
+  --color-user-bubble: #EAEFE8;
+
+  --font-serif: 'Fraunces', 'DM Serif Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+:root {
+  --color-bg: #FBF6EF;
+  --color-surface: #FFFFFF;
+  --color-border: #EFE7DC;
+  --color-primary: #C98B7A;
+  --color-secondary: #8AA88A;
+  --color-gold: #D4A85A;
+  --color-text: #3A332D;
+  --color-muted: #8A7F73;
+  --color-bot-bubble: #F4EBDF;
+  --color-user-bubble: #EAEFE8;
+}
+
+[data-theme="dark"] {
+  --color-bg: #1B1714;
+  --color-surface: #25201C;
+  --color-border: #332C26;
+  --color-primary: #D69E8E;
+  --color-secondary: #A4C2A4;
+  --color-gold: #E5BC75;
+  --color-text: #EDE5D9;
+  --color-muted: #998E80;
+  --color-bot-bubble: #2A2420;
+  --color-user-bubble: #232A23;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Theme crossfade — scoped so it only runs during the toggle, not constantly */
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease !important;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+/* Mobile layout adjustments */
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .no-print { display: none !important; }
+
+  body {
+    background: #fff;
+    color: #1a1a1a;
+    font-family: 'Inter', Georgia, serif;
+  }
+
+  @page {
+    margin: 2cm 2.5cm;
+  }
+
+  /* Solace print header */
+  body::before {
+    content: "Solace — Conversation Export";
+    display: block;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #c98b7a;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #efe7dc;
+  }
+
+  /* Bot bubble */
+  [data-role="assistant"] {
+    background: #f9f4ec !important;
+    border: 1px solid #e5d9cb !important;
+    border-radius: 12px !important;
+    page-break-inside: avoid;
+  }
+
+  /* User bubble */
+  [data-role="user"] {
+    background: #edf0ec !important;
+    border-radius: 12px !important;
+    page-break-inside: avoid;
+  }
+}
